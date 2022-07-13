@@ -11,6 +11,15 @@ class BmiDataScreen extends StatefulWidget {
 
 class _BmiDataScreenState extends State<BmiDataScreen> {
   int height = 100;
+  int weight = 50;
+  int age = 20;
+
+  double calculateBmi() {
+    double heightInMeter = height / 100;
+
+    final bmi = weight / (heightInMeter * heightInMeter);
+    return bmi;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +111,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           style: labelTextStyle,
                         ),
                         Text(
-                          '60',
+                          '$weight',
                           style: numberTextStyle,
                         ),
                         SizedBox(
@@ -112,7 +121,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
-                              onPressed: (() {}),
+                              onPressed: (() {
+                                weight -= 1;
+                                setState(() {});
+                              }),
                               elevation: 0,
                               child: Icon(
                                 Icons.remove,
@@ -127,7 +139,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             ),
                             SizedBox(width: 10),
                             RawMaterialButton(
-                              onPressed: (() {}),
+                              onPressed: (() {
+                                weight += 1;
+                                setState(() {});
+                              }),
                               elevation: 0,
                               child: Icon(
                                 Icons.add,
@@ -156,7 +171,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           style: labelTextStyle,
                         ),
                         Text(
-                          '20',
+                          '$age',
                           style: numberTextStyle,
                         ),
                         SizedBox(
@@ -166,7 +181,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
-                              onPressed: (() {}),
+                              onPressed: (() {
+                                age = age -= 1;
+                                setState(() {});
+                              }),
                               elevation: 0,
                               child: Icon(
                                 Icons.remove,
@@ -181,7 +199,10 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                             ),
                             SizedBox(width: 10),
                             RawMaterialButton(
-                              onPressed: (() {}),
+                              onPressed: (() {
+                                age += 1;
+                                setState(() {});
+                              }),
                               elevation: 0,
                               child: Icon(
                                 Icons.add,
@@ -206,19 +227,28 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         ),
         GestureDetector(
           onTap: () {
+            // print(calculateBmi());
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: ((context) {
-                  return BmiResultScreen();
+                  return BmiResultScreen(
+                    bmi: calculateBmi(),
+                  );
                 }),
               ),
             );
           },
           child: Container(
-            height: 60,
-            color: Colors.blue,
+            height: 80,
+            color: Color(0xffec3c66),
             child: const Center(
-              child: Text('Calculate BMI'),
+              child: Text(
+                'Calculate BMI',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
             ),
           ),
         )
