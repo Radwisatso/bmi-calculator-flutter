@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color primaryColor = const Color(0xff0a0e21);
+const Color primaryColor = Color(0xff0a0e21);
 
 TextStyle? labelTextStyle = const TextStyle(
   fontSize: 18,
